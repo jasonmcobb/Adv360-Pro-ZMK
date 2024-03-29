@@ -19,20 +19,68 @@
 #include <dt-bindings/zmk/backlight.h>
 
 / {
-  behaviors {
-    #include "macros.dtsi"
-    #include "version.dtsi"
+/*
+  *behaviors {
+  *  #include "macros.dtsi"
+  *  #include "version.dtsi"
+  *
+  *  hm: homerow_mods {
+  *      compatible = "zmk,behavior-hold-tap";
+  *      label = "HOMEROW_MODS";
+  *      #binding-cells = <2>;
+  *      tapping-term-ms = <200>;
+  *      quick_tap_ms = <175>;
+  *      flavor = "tap-preferred";
+  *      bindings = <&kp>, <&kp>;
+  *  };
+  *};
+  */
+    behaviors {
+        #include "macros.dtsi"
 
-    hm: homerow_mods {
-        compatible = "zmk,behavior-hold-tap";
-        label = "HOMEROW_MODS";
-        #binding-cells = <2>;
-        tapping-term-ms = <200>;
-        quick_tap_ms = <175>;
-        flavor = "tap-preferred";
-        bindings = <&kp>, <&kp>;
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick_tap_ms = <175>;
+            #flavor = "tap-preferred";
+            flavor = "balanced";
+            bindings = <&kp>, <&kp>;
+        };
+
+        hm_l: homerow_mods_left {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS_LEFT";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick_tap_ms = <175>;
+            flavor = "balanced";
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <KEYS_RIGHT THUMBS>;
+        };
+
+        hm_r: homerow_mods_right {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS_RIGHT";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick_tap_ms = <175>;
+            flavor = "balanced";
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <KEYS_LEFT THUMBS>;
+        };
     };
-  };
+
+    // Home row mods
+    #define _F_SFT &hm_l LSHFT F  // Shift on index fingers
+    #define _J_SFT &hm_r RSHFT J
+    #define _D_CMD &hm_l LGUI D   // Command on middle fingers
+    #define _K_CMD &hm_r RGUI K
+    #define _S_CTL &hm_l LCTRL S  // Control on index down
+    #define _L_CTL &hm_r RCTRL L
+    #define _A_OPT &hm_l LALT A   // Option on ring finger
+    #define _SEMI_OPT &hm_r RALT SEMI
 
     keymap {
         compatible = "zmk,keymap";
@@ -42,7 +90,7 @@
             bindings = <
         &kp GRAVE     &kp N1  &kp N2  &kp N3  &kp N4  &kp N5                    &tog 1                                                                  &mo 3  &kp N6  &kp N7     &kp N8    &kp N9    &kp N0  &kp MINUS
           &kp TAB      &kp Q   &kp W   &kp E   &kp R   &kp T                     &none                                                                  &none   &kp Y   &kp U      &kp I     &kp O     &kp P   &kp BSLH
- &mt LCTRL ESCAPE      &kp A   &kp S   &kp D   &kp F   &kp G                     &none     &kp DELETE  &kp LALT                   &kp LGUI  &kp RCTRL   &none   &kp H   &kp J      &kp K     &kp L  &kp SEMI    &kp SQT
+ &mt LCTRL ESCAPE      _A_OPT   _S_CTL   _D_CMD   _F_SFT   &kp G                     &none     &kp DELETE  &kp LALT                   &kp LGUI  &kp RCTRL   &none   &kp H   _J_SFT      _K_CMD     _L_CTL  _SEMI_OPT    &kp SQT
         &kp LSHFT      &kp Z   &kp X   &kp C   &kp V   &kp B                                           &kp HOME                  &kp PG_UP                      &kp N   &kp M  &kp COMMA   &kp DOT  &kp FSLH  &kp RSHFT
          &kp RALT  &kp EQUAL   &none   &none   &none                    &mt LGUI ENTER  &kp BACKSPACE   &kp END                  &kp PG_DN  &kp SPACE   &mo 2           &none      &none  &kp LBKT  &kp RBKT      &none
             >;

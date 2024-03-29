@@ -79,6 +79,13 @@
             bindings = <&kp>, <&kp>;
             hold-trigger-key-positions = <KEYS_LEFT THUMBS>;
         };
+
+        macro_ver: macro_ver {
+            compatible = "zmk,behavior-macro";
+            label = "macro_version";
+            #binding-cells = <0>;
+            bindings = <&kp RET>;
+        };
     };
 
     // Home row mods

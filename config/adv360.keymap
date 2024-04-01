@@ -36,10 +36,10 @@
 
 #define THUMBS THUMBS_LEFT THUMBS_RIGHT
 
-&lt {
-    quick-tap-ms = <300>;
-    global-quick-tap;
-};
+//&lt {
+//    quick-tap-ms = <-300>;
+//    global-quick-tap;
+//};
 
 / {
     behaviors {
@@ -50,7 +50,7 @@
             label = "HOMEROW_MODS";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
-            quick_tap_ms = <175>;
+            quick_tap_ms = <-175>;
             #flavor = "tap-preferred";
             flavor = "balanced";
             bindings = <&kp>, <&kp>;

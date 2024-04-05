@@ -55,6 +55,9 @@
         #ifndef HOME_ROW_REPEAT_DECAY
         #define HOME_ROW_REPEAT_DECAY 300 // "tap then hold" for key auto-repeat
         #endif
+        #ifndef SHIFT_HOLDING_TYPE
+        #define SHIFT_HOLDING_TYPE "tap-preferred"
+        #endif
         #ifndef SHIFT_HOLDING_TIME
         #define SHIFT_HOLDING_TIME 170
         #endif
